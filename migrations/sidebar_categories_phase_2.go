@@ -116,13 +116,20 @@ func (worker *Worker) runSidebarCategoriesPhase2Migration(lastDone string) (bool
 		return true, progress.ToJson(), nil
 	}
 
-	progress.LastTeamId = result["TeamId"].(string)
-	progress.LastUserId = result["UserId"].(string)
 	progress.LastChannelId = strings.Repeat("0", 26)
+	progress.LastTeamId = strings.Repeat("0", 26)
+	progress.LastUserId = strings.Repeat("0", 26)
+	progress.LastSortOrder = 0
+	if val, ok := result["UserId"].(string); ok {
+		progress.LastUserId = val
+	}
+	if val, ok := result["TeamId"].(string); ok {
+		progress.LastTeamId = val
+	}
 	if val, ok := result["ChannelId"].(string); ok {
 		progress.LastChannelId = val
 	}
-	if val, ok := result["ChannelId"].(int64); ok {
+	if val, ok := result["SortOrder"].(int64); ok {
 		progress.LastSortOrder = val
 	}
 	return false, progress.ToJson(), nil

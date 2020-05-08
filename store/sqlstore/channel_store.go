@@ -677,6 +677,9 @@ func (s SqlChannelStore) MigrateDirectGroupMessagesToSidebarChannels(lastChannel
 	if appErr != nil {
 		return nil, appErr
 	}
+	if len(userMemberships) == 0 {
+		return nil, nil
+	}
 	data := make(map[string]interface{})
 	data["UserId"] = userMemberships[len(userMemberships)-1].UserId
 	data["ChannelId"] = userMemberships[len(userMemberships)-1].ChannelId
