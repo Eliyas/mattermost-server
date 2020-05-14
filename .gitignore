@@ -109,3 +109,5 @@ client
 __debug_bin
 report.xml
 go.*.orig
+
+vendor/

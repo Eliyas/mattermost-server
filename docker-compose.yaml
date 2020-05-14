@@ -4,6 +4,8 @@ services:
     container_name: mattermost-mysql
     ports:
       - "3306:3306"
+    mem_limit: 300m
+    mem_reservation: 100m
     extends:
         file: build/docker-compose.common.yml
         service: mysql
@@ -11,6 +13,8 @@ services:
     container_name: mattermost-postgres
     ports:
       - "5432:5432"
+    mem_limit: 300m
+    mem_reservation: 100m
     extends:
         file: build/docker-compose.common.yml
         service: postgres
