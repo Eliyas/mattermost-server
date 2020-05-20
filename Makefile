@@ -37,7 +37,8 @@ else
 	BUILD_ENTERPRISE_READY = false
 	BUILD_TYPE_NAME = team
 endif
-BUILD_WEBAPP_DIR ?= ../../../mattermost-webapp
+BUILD_WEBAPP_DIR ?= D://mattermost-webapp
+BUILD_SERVER_DIR ?= D://work-space/GitHubExamples/mattermost-server
 BUILD_CLIENT = false
 BUILD_HASH_CLIENT = independant
 ifneq ($(wildcard $(BUILD_WEBAPP_DIR)/.),)
@@ -397,7 +398,7 @@ run-cli: start-docker ## Runs CLI.
 run-client: ## Runs the webapp.
 	@echo Running mattermost client for development
 
-	ln -nfs $(BUILD_WEBAPP_DIR)/dist client
+	ln -nfs $(BUILD_WEBAPP_DIR)/dist $(BUILD_SERVER_DIR)/client
 	cd $(BUILD_WEBAPP_DIR) && $(MAKE) run
 
 run-client-fullmap: ## Legacy alias to run-client
